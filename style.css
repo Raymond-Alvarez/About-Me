@@ -6,37 +6,57 @@
 }
 
 :root {
-    --primary-blue: #0984e3;
-    --accent-orange: #FF4433;
-    --light-bg: #f0f2f5;
-    --dark-text: #2d3436;
+    --bg-deep: #0f172a;       /* Dark Navy - Professional base */
+    --card-white: #ffffff;    /* Clean white for the content */
+    --primary-pop: #0ea5e9;   /* Bright Cyan - For headers */
+    --accent-warm: #fb923c;   /* Soft Orange - For underlines/bullet points */
+    --text-main: #334155;     /* Slate Gray - Easier on the eyes than black */
 }
 
 body {
-    background-color: var(--light-bg);
-    color: var(--dark-text);
+    background-color: var(--bg-deep); /* Dark background makes cards "float" */
+    color: var(--text-main);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
 }
 
 /* --- 2. Centered Header --- */
 header {
-    background: linear-gradient(135deg, #0984e3 0%, #076bb8 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%);
     color: white;
-    padding: 3.5rem 0 2rem 0; 
+    /* Reduced top padding from 4.5rem to 2.5rem to bring "About Me" up */
+    padding: 2.5rem 0 2.5rem 0; 
     width: 100%;
     z-index: 1000;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative; /* Stays in flow until scrolled */
+    position: relative; 
     display: block;
+}
+
+/* New Label Styling */
+.header-label {
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: 2rem; 
+    font-weight: 800;
+    /* Reduced to 15px to match the margin below the image */
+    margin-bottom: 15px; 
+    color: white;
+    display: block;
+    transition: 0.3s ease;
 }
 
 header.shrink {
     position: fixed;
     top: 0;
     padding: 0.6rem 0;
-    background: rgba(9, 132, 227, 0.98);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    background: rgba(15, 23, 42, 0.98); 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* Hides the label when scrolling */
+header.shrink .header-label {
+    display: none;
 }
 
 .header-content {
@@ -51,7 +71,8 @@ header.shrink {
     height: 112px;
     border-radius: 50%;
     border: 4px solid white;
-    margin-bottom: 15px;
+    /* This matches the label's margin-bottom for symmetry */
+    margin-bottom: 15px; 
     transition: 0.4s;
     display: block;
 }
@@ -66,12 +87,15 @@ header.shrink .profile-img {
 header.shrink .header-content {
     flex-direction: row; 
     justify-content: center;
+    align-items: center;
 }
 
 header h1 { 
-    font-size: 1.8rem; 
+    font-size: 2.2rem; 
+    font-weight: 700;
     transition: 0.4s; 
 }
+
 header.shrink h1 { 
     font-size: 1.1rem; 
     margin-left: 12px; 
@@ -109,13 +133,11 @@ body.fixed-header .header-spacer {
 .card {
     background: white;
     padding: 35px;
-    margin-bottom: 30px; /* The 'Rhythm' value we are matching */
+    margin-bottom: 30px; 
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-    
     opacity: 0;
     transform: translateY(30px);
-    
     transition: opacity 0.7s ease, 
                 transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
                 box-shadow 0.3s ease;
@@ -126,19 +148,19 @@ body.fixed-header .header-spacer {
     transform: translateY(0);
 }
 
-.card:hover {
-    transform: translateY(-12px) scale(1.01);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-    border-bottom: 3px solid var(--primary-blue);
-}
-
 .card h2 {
-    color: var(--primary-blue);
+    color: var(--bg-deep);
     margin-bottom: 1.2rem;
     font-size: 1.6rem;
-    border-bottom: 2px solid var(--accent-orange);
+    border-bottom: 3px solid var(--accent-warm); 
     display: inline-block;
     padding-bottom: 4px;
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.01);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    border-bottom: 3px solid var(--primary-pop);
 }
 
 .card ul, .card ol {
@@ -148,7 +170,10 @@ body.fixed-header .header-spacer {
 .card li {
     margin-bottom: 10px;
 }
-
+/* Adds space between the intro text and the new bullet points */
+.experience-list {
+    margin-top: 20px; 
+}
 /* --- 5. Custom Sections --- */
 #quiz .card p {
     margin-bottom: 1.5rem;
