@@ -1,0 +1,172 @@
+/* --- 1. Global Reset & Variables --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-blue: #0984e3;
+    --accent-orange: #FF4433;
+    --light-bg: #f0f2f5;
+    --dark-text: #2d3436;
+}
+
+body {
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* --- 2. Centered Header --- */
+header {
+    background: linear-gradient(135deg, #0984e3 0%, #076bb8 100%);
+    color: white;
+    padding: 3.5rem 0 2rem 0; 
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative; /* Stays in flow until scrolled */
+    display: block;
+}
+
+header.shrink {
+    position: fixed;
+    top: 0;
+    padding: 0.6rem 0;
+    background: rgba(9, 132, 227, 0.98);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-img {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    border: 4px solid white;
+    margin-bottom: 15px;
+    transition: 0.4s;
+    display: block;
+}
+
+header.shrink .profile-img {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 0;
+    border-width: 2px;
+}
+
+header.shrink .header-content {
+    flex-direction: row; 
+    justify-content: center;
+}
+
+header h1 { 
+    font-size: 1.8rem; 
+    transition: 0.4s; 
+}
+header.shrink h1 { 
+    font-size: 1.1rem; 
+    margin-left: 12px; 
+}
+
+/* --- 3. Container & Content Spacing --- */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+main {
+    margin-top: 0; 
+    padding-top: 0; 
+    padding-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* THE FIX: Specifically pushing the first card away from the header */
+main article.card:first-of-type {
+    margin-top: 40px; 
+}
+
+.header-spacer {
+    display: none;
+    height: 240px; /* Keeps the page from jumping when header goes fixed */
+}
+
+body.fixed-header .header-spacer {
+    display: block;
+}
+/* --- 4. Card Styling & Animation --- */
+.card {
+    background: white;
+    padding: 35px;
+    margin-bottom: 30px; /* The 'Rhythm' value we are matching */
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    
+    opacity: 0;
+    transform: translateY(30px);
+    
+    transition: opacity 0.7s ease, 
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.3s ease;
+}
+
+.card.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.01);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    border-bottom: 3px solid var(--primary-blue);
+}
+
+.card h2 {
+    color: var(--primary-blue);
+    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
+    border-bottom: 2px solid var(--accent-orange);
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+.card ul, .card ol {
+    margin-left: 25px;
+}
+
+.card li {
+    margin-bottom: 10px;
+}
+
+/* --- 5. Custom Sections --- */
+#quiz .card p {
+    margin-bottom: 1.5rem;
+}
+
+#interests ol li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+#interests ol li:last-child {
+    border-bottom: none;
+}
+
+/* --- 6. Footer --- */
+footer { 
+    text-align: center; 
+    padding: 40px; 
+    color: #95a5a6; 
+    font-size: 0.9rem;
+}
